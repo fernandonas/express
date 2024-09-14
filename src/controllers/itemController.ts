@@ -40,10 +40,8 @@ export const getById = (req: Request, res: Response): void => {
 // Criar um novo item
 export const Add = (req: Request, res: Response): void => {
   const items = readDataFromFile();
-  const newItem: ConfigurationSicChartDrawerData = {
-    uuid: uuidv4(),
-    ...req.body
-  };
+  const newItem: ConfigurationSicChartDrawerData = { ...req.body };
+  newItem.uuid = uuidv4();
   items.push(newItem);
   writeDataToFile(items);
   res.status(201).json(newItem);
