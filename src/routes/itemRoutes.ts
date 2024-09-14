@@ -7,7 +7,7 @@ const router = Router();
  * @swagger
  * /items:
  *   get:
- *     summary: Lista todos os itens
+ *     summary: Listar todos os itens
  *     responses:
  *       200:
  *         description: Sucesso
@@ -38,7 +38,7 @@ router.get('/:id', getById);
  * @swagger
  * /items:
  *   post:
- *     summary: Criar uma nova configuração
+ *     summary: Criar um novo item
  *     requestBody:
  *       required: true
  *       content:
@@ -92,7 +92,7 @@ router.get('/:id', getById);
  *                   type: string
  *     responses:
  *       201:
- *         description: Configuração criada com sucesso
+ *         description: Item criado com sucesso
  */
 
 router.post('/', Add);
@@ -101,7 +101,7 @@ router.post('/', Add);
  * @swagger
  * /items/{uuid}:
  *   put:
- *     summary: Atualizar uma configuração existente
+ *     summary: Atualizar um item existente
  *     parameters:
  *       - in: path
  *         name: uuid
@@ -162,9 +162,9 @@ router.post('/', Add);
  *                   type: string
  *     responses:
  *       200:
- *         description: Configuração atualizada com sucesso
+ *         description: Item atualizado com sucesso
  *       404:
- *         description: Configuração não encontrada
+ *         description: Item não encontrado
  */
 
 router.put('/:id', update);
