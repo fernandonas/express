@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getItems, getItemById, createItem, updateItem, deleteItem } from '../controllers/itemController';
+import { getAll, getById, Add, update, remove } from '../controllers/itemController';
 
 const router = Router();
 
@@ -12,7 +12,7 @@ const router = Router();
  *       200:
  *         description: Sucesso
  */
-router.get('/', getItems);
+router.get('/', getAll);
 
 /**
  * @swagger
@@ -32,13 +32,13 @@ router.get('/', getItems);
  *       404:
  *         description: Item não encontrado
  */
-router.get('/:id', getItemById);
+router.get('/:id', getById);
 
 /**
  * @swagger
  * /items:
  *   post:
- *     summary: Criar um novo item
+ *     summary: Criar uma nova configuração
  *     requestBody:
  *       required: true
  *       content:
@@ -46,26 +46,67 @@ router.get('/:id', getItemById);
  *           schema:
  *             type: object
  *             required:
- *               - nome
+ *               - uuid
+ *               - limitYellow
+ *               - limitGreen
+ *               - objective
+ *               - toggle
+ *               - indicator
+ *               - unit
+ *               - yAxisValues
+ *               - xAxisValues
  *             properties:
- *               nome:
+ *               uuid:
  *                 type: string
+ *                 description: Identificador único da configuração
+ *               limitYellow:
+ *                 type: string
+ *                 description: Limite amarelo
+ *               limitRed:
+ *                 type: string
+ *                 description: Limite vermelho (opcional)
+ *               limitGreen:
+ *                 type: string
+ *                 description: Limite verde
+ *               objective:
+ *                 type: string
+ *                 description: Objetivo da configuração
+ *               toggle:
+ *                 type: boolean
+ *                 description: Estado do toggle
+ *               indicator:
+ *                 type: string
+ *                 description: Indicador associado
+ *               unit:
+ *                 type: string
+ *                 description: Unidade de medida
+ *               yAxisValues:
+ *                 type: array
+ *                 description: Valores do eixo Y
+ *                 items:
+ *                   type: number
+ *               xAxisValues:
+ *                 type: array
+ *                 description: Valores do eixo X
+ *                 items:
+ *                   type: string
  *     responses:
  *       201:
- *         description: Item criado com sucesso
+ *         description: Configuração criada com sucesso
  */
-router.post('/', createItem);
+
+router.post('/', Add);
 
 /**
  * @swagger
- * /items/{id}:
+ * /items/{uuid}:
  *   put:
- *     summary: Atualizar um item existente
+ *     summary: Atualizar uma configuração existente
  *     parameters:
  *       - in: path
- *         name: id
+ *         name: uuid
  *         required: true
- *         description: ID do item
+ *         description: UUID da configuração
  *         schema:
  *           type: string
  *     requestBody:
@@ -75,17 +116,58 @@ router.post('/', createItem);
  *           schema:
  *             type: object
  *             required:
- *               - nome
+ *               - uuid
+ *               - limitYellow
+ *               - limitGreen
+ *               - objective
+ *               - toggle
+ *               - indicator
+ *               - unit
+ *               - yAxisValues
+ *               - xAxisValues
  *             properties:
- *               nome:
+ *               uuid:
  *                 type: string
+ *                 description: Identificador único da configuração
+ *               limitYellow:
+ *                 type: string
+ *                 description: Limite amarelo
+ *               limitRed:
+ *                 type: string
+ *                 description: Limite vermelho (opcional)
+ *               limitGreen:
+ *                 type: string
+ *                 description: Limite verde
+ *               objective:
+ *                 type: string
+ *                 description: Objetivo da configuração
+ *               toggle:
+ *                 type: boolean
+ *                 description: Estado do toggle
+ *               indicator:
+ *                 type: string
+ *                 description: Indicador associado
+ *               unit:
+ *                 type: string
+ *                 description: Unidade de medida
+ *               yAxisValues:
+ *                 type: array
+ *                 description: Valores do eixo Y
+ *                 items:
+ *                   type: number
+ *               xAxisValues:
+ *                 type: array
+ *                 description: Valores do eixo X
+ *                 items:
+ *                   type: string
  *     responses:
  *       200:
- *         description: Item atualizado com sucesso
+ *         description: Configuração atualizada com sucesso
  *       404:
- *         description: Item não encontrado
+ *         description: Configuração não encontrada
  */
-router.put('/:id', updateItem);
+
+router.put('/:id', update);
 
 /**
  * @swagger
@@ -105,6 +187,6 @@ router.put('/:id', updateItem);
  *       404:
  *         description: Item não encontrado
  */
-router.delete('/:id', deleteItem);
+router.delete('/:id', remove);
 
 export default router;
